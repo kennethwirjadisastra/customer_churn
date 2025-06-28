@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import seaborn as sns
 
-def plot_hist(df, figsize, nrows=None, ncols=None, hue=None, palette=None, showmeans=False):
+def plot_hist(df, figsize, nrows=None, ncols=None, hue=None, palette=None, alpha=0.4, showmeans=False):
     n_features = len(df.columns) - 1 if 'Churn' in df.columns else len(df.columns)    # exclude 'Churn'
     n_features = n_features - 1 if 'Cluster' in df.columns else n_features            # exclude 'cluster'
 
@@ -27,7 +27,7 @@ def plot_hist(df, figsize, nrows=None, ncols=None, hue=None, palette=None, showm
         col = df.columns[idx] if idx < len(df.columns) else None
         if col != None and col != 'Churn' and col != 'Cluster': # only plot if col exists and is not 'Churn' or 'cluster'
             kde = True if col[:3]=='Avg' else False
-            sns.histplot(data=df, x=col, hue=hue, kde=kde, palette=palette, ax=ax[idx])
+            sns.histplot(data=df, x=col, hue=hue, kde=kde, palette=palette, ax=ax[idx], alpha=alpha)
             
             if showmeans:
                 col_mean = df[col].mean()
@@ -50,7 +50,7 @@ def plot_hist(df, figsize, nrows=None, ncols=None, hue=None, palette=None, showm
     return (fig, ax)
 
 
-def plot_box(df, figsize, nrows=None, ncols=None, hue=None, palette=None, showmeans=False):
+def plot_box(df, figsize, nrows=None, ncols=None, hue=None, palette=None, alpha=1, showmeans=False):
     n_features = len(df.columns) - 1 if 'Churn' in df.columns else len(df.columns)    # exclude 'Churn'
     n_features = n_features - 1 if 'Cluster' in df.columns else n_features            # exclude 'cluster'
 
@@ -75,7 +75,7 @@ def plot_box(df, figsize, nrows=None, ncols=None, hue=None, palette=None, showme
         col = df.columns[idx] if idx < len(df.columns) else None
         if col != None and col != 'Churn' and col != 'Cluster': # only plot if col exists and is not 'Churn' or 'cluster'
         
-            sns.boxplot(data=df, y=col, hue=hue, palette=palette, showmeans=showmeans, ax=ax[idx]) 
+            sns.boxplot(data=df, y=col, hue=hue, palette=palette, showmeans=showmeans, ax=ax[idx], boxprops=dict(alpha=alpha)) 
             ax[idx].set_title(f'{col} Boxplot', fontsize=14)
             ax[idx].set_ylabel(f'{col}', fontsize=12)
             ax[idx].grid()
@@ -91,7 +91,7 @@ def plot_box(df, figsize, nrows=None, ncols=None, hue=None, palette=None, showme
     return (fig, ax)
 
 
-def plot_bar(df, figsize, nrows=None, ncols=None, hue=None, palette=None, raw_magnitude=True):
+def plot_bar(df, figsize, nrows=None, ncols=None, hue=None, palette=None, alpha=1, raw_magnitude=True):
     n_features = len(df.columns) - 1 if 'Churn' in df.columns else len(df.columns)    # exclude 'Churn'
     n_features = n_features - 1 if 'Cluster' in df.columns else n_features            # exclude 'cluster'
 
@@ -117,7 +117,7 @@ def plot_bar(df, figsize, nrows=None, ncols=None, hue=None, palette=None, raw_ma
         if col != None and col != 'Churn' and col != 'Cluster': # only plot if col exists and is not 'Churn' or 'cluster'
 
             if raw_magnitude:
-                sns.countplot(data=df, x=col, hue=hue,palette=palette, ax=ax[idx])
+                sns.countplot(data=df, x=col, hue=hue,palette=palette, ax=ax[idx], alpha=alpha)
                 ax[idx].set_title(f'{hue} Count by {col}', fontsize=14)
                 ax[idx].set_ylabel(None)
                 
@@ -140,7 +140,7 @@ def plot_bar(df, figsize, nrows=None, ncols=None, hue=None, palette=None, raw_ma
     return (fig, ax)
 
 
-def plot_pie(df, figsize, nrows=None, ncols=None, n_clusters=3):
+def plot_pie(df, figsize, nrows=None, ncols=None, n_clusters=3, alpha=1):
     n_features = len(df.columns) - 1 if 'Cluster' in df.columns else len(df.columns)    # exclude 'Cluster'
 
     on_proportion = df.groupby('Cluster').mean()
@@ -173,20 +173,26 @@ def plot_pie(df, figsize, nrows=None, ncols=None, n_clusters=3):
             super_ax.set_title(f'{col} by Cluster', fontweight='bold')
 
             for n in range(n_clusters):
-                sub_ax = super_ax.inset_axes([n*0.3, 0.1, 0.28, 0.8])
+                sub_ax = super_ax.inset_axes([n*0.3+0.05, 0.025, 0.28, 0.95])
 
                 if idx < len(on_proportion.columns):
                     on = on_proportion.iloc[n,idx]
                     off = 1 - on
 
-                    sub_ax.pie([on, off], labels=['1','0'], autopct='%1.2f%%')
+                    sub_ax.pie([on, off], labels=['1','0'], autopct='%1.2f%%', 
+                               pctdistance=0.8, labeldistance=None, wedgeprops={"alpha": alpha})
                     sub_ax.set_title(f'Cluster {n}')
         else:
             super_ax.text(0.5, 0.5, 'None', fontsize=20,
                                 horizontalalignment='center', verticalalignment='center', 
                                 transform=super_ax.transAxes)
+        if idx == 0:
+            labels = ['feature=1', 'feature=0']
+            handles, _ = sub_ax.get_legend_handles_labels()
+            fig.legend(handles, labels, bbox_to_anchor=(0.5,1.1))
 
 
+    
     plt.tight_layout()
     
     return (fig, ax)
