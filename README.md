@@ -147,7 +147,8 @@ plt.show()
 ![](README_files/figure-markdown_strict/cell-2-output-1.png)
 
 We find that `Churn` is mostly influenced by `Age`,
-`Contract_period`,`Month_to_end_contract`,`Lifetime`, and`Avg_class_frequency_current_month\`.
+`Contract_period`,`Month_to_end_contract`,`Lifetime`,
+and`Avg_class_frequency_current_month\`.
 
 ### 2. Clustering: [`gym_churn_clustring.ipynb`](gym_churn_clustring.ipynb)
 
@@ -319,12 +320,6 @@ to leave soon
 -   Longer contract lengths
 -   Loyal customers
 
-**Recommendations**
-
-* Focus attention on Cluster 0. These members are the ones most at risk of leaving
-* Keep members in clusters 1 and 2 engaged to prevent them from migrating to cluster 0
-  * Reward members in these clusters for their loyalty to your gym
-
 ### 3. Prediction: [`gym_churn_modeling.ipynb`](gym_churn_modeling.ipynb)
 
 Finally, we can predict whether or not each customer will leave the gym
@@ -401,36 +396,67 @@ also leads to wasted efforts trying to retain customers that are not
 leaving.
 
 ## Conclusions
-Given the analysis, we recommend focussing efforts on members with the following characteristics:
+
+Given the analysis, we recommend focussing efforts on members with the
+following characteristics:
 
 ### New members
-- Keep new members engaged. These first few months are the most important for new members as this is when they are most likely to leave. 
+
+-   Keep new members engaged. These first few months are the most
+    important for new members as this is when they are most likely to
+    leave.
 
 ### Short contract periods
-- Members with short contract periods are less likely to stay than other members. Reminding these members to renew their contracts will help them retain their membership status. Additionally, the gym may provide incentives for longer contract periods such as lower rates for a lump sum payment upfront.
+
+-   Members with short contract periods are less likely to stay than
+    other members. Reminding these members to renew their contracts will
+    help them retain their membership status. Additionally, the gym may
+    provide incentives for longer contract periods such as lower rates
+    for a lump sum payment upfront.
 
 ### Short time remaining on contracts
-- As a member's contract expiration date approaches, they are more at risk of leaving the gym. We can keep these members from leaving by reminding them of their current benefits, and providing loyalty bonuses for staying.
+
+-   As a member’s contract expiration date approaches, they are more at
+    risk of leaving the gym. We can keep these members from leaving by
+    reminding them of their current benefits, and providing loyalty
+    bonuses for staying.
 
 ### Members in cluster 0
-- Members in this cluster have a higher probabilitiy of leaving the gym than members in clusters 1 and 2.
-- These members tend to have shorter contract lengths (and thereby less time remaining on their contracts), so the same strategies for short contract periods and short time remaining can be applied to these members.
-- These members also tend have a higher barrier to entry (no promo/partner discounts, longer commute, etc.), so keeping these members motivated to stay with the gym is important. Customers in this group could be incentivized to stay by using the following:
-    - Limited time offers
-    - Loyalty perks
-    - More personalized experience
+
+-   Members in this cluster have a higher probabilitiy of leaving the
+    gym than members in clusters 1 and 2.
+-   These members tend to have shorter contract lengths (and thereby
+    less time remaining on their contracts), so the same strategies for
+    short contract periods and short time remaining can be applied to
+    these members.
+-   These members also tend have a higher barrier to entry (no
+    promo/partner discounts, longer commute, etc.), so keeping these
+    members motivated to stay with the gym is important. Customers in
+    this group could be incentivized to stay by using the following:
+    -   Limited time offers
+    -   Loyalty perks
+    -   More personalized experience
 
 ## Reproducability
+
 Clone the repository using the following command:
-```bash
+
+``` {bash}
 git clone https://github.com/kennethwirjadisastra/customer_churn.git
 ```
-The data is located in the [/data](/data) subdirectory, but it can also be downloaded from [kaggle](https://www.kaggle.com/datasets/adrianvinueza/gym-customers-features-and-churn/data).
-The dependencies for this project are listed in [`requirements.txt`](requirements.txt). They can be installed by running 
-```bash
+
+The data is located in the [/data](./data) subdirectory, but it can also
+be downloaded from
+[kaggle](https://www.kaggle.com/datasets/adrianvinueza/gym-customers-features-and-churn/data).
+The dependencies for this project are listed in
+[`requirements.txt`](requirements.txt). They can be installed by running
+
+``` {bash}
 pip install -r requirements.txt
 ```
-The notebooks are to be run in the following order:
-1. [`gym_churn_eda.ipynb`](gym_churn_eda.ipynb)
-2. [`gym_churn_clustering.ipynb`](gym_churn_clustering.ipynb)
-3. [`gym_churn_modeling.ipynb`](gym_churn_modeling.ipynb)
+
+Once the necessary dependencies have been installed, the notebooks
+should be run in the following order: 1.
+[`gym_churn_eda.ipynb`](gym_churn_eda.ipynb) 2.
+[`gym_churn_clustering.ipynb`](gym_churn_clustering.ipynb) 3.
+[`gym_churn_modeling.ipynb`](gym_churn_modeling.ipynb)
