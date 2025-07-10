@@ -15,7 +15,7 @@ customers.
 ## Data
 
 The data was collected on
-[kaggle](https://www.kaggle.com/datasets/adrianvinueza/gym-customers-features-and-churn/data).
+[kaggle](https://www.kaggle.com/datasets/adrianvinueza/gym-customers-features-and-churn).
 It consists of 13 features, and a binary target `Churn`. The data
 has no missing values and has already been converted into numerical
 values. The data dictionary is shown below, and can be accessed in the [data](/data) subdirectory.
