@@ -16,9 +16,9 @@ customers.
 
 The data was collected on
 [kaggle](https://www.kaggle.com/datasets/adrianvinueza/gym-customers-features-and-churn/data).
-It is comprised of 13 features, and a binary target `Churn`. The data
+It consists of 13 features, and a binary target `Churn`. The data
 has no missing values and has already been converted into numerical
-values. The data dictionary is shown below.
+values. The data dictionary is shown below, and can be accessed in the [data](/data) subdirectory.
 
 <table>
 <colgroup>
@@ -166,9 +166,9 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import RobustScaler
 from sklearn.mixture import GaussianMixture
 
+# split data
 X = df.drop('Churn', axis=1)
 y = df['Churn']
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
 # perform PCA to reduce dimensionality of data for visualizations
@@ -179,17 +179,17 @@ X_train_norm = scaler.fit_transform(X_train)
 X_train_pca = pca.fit_transform(X_train_norm)
 
 # perform clsutering
-n_components = 3
-gmm = GaussianMixture(n_components=n_components, random_state=0)
+n_clusters = 3
+gmm = GaussianMixture(n_components=n_clusters, covariance_type='full', random_state=0)
 labels_train = gmm.fit_predict(X_train_pca)
 
 # plot clusters
 fig, ax = plt.subplots()
-cmap = plt.cm.get_cmap('viridis')
-colors = {i: cmap(i / (n_components - 1)) for i in range(n_components)}
-for i in range(n_components):
-  cluster = X_train_pca[labels_train == i]
-  ax.scatter(cluster[:, 0], cluster[:, 1], color=colors[i], label=f'Cluster {i}', s=30, alpha=0.6)
+cmap = plt.colormaps['viridis']
+colors = {i: cmap(i / (n_clusters - 1)) for i in range(n_clusters)}
+for i in range(n_clusters):
+  cluster_i = X_train_pca[labels_train == i]
+  ax.scatter(cluster_i[:, 0], cluster_i[:, 1], color=colors[i], label=f'Cluster {i}', s=30, alpha=0.6)
 ax.set_title("GMM Clustering")
 ax.set_xlabel("Principal Component 1")
 ax.set_ylabel("Principal Component 2")
@@ -445,8 +445,8 @@ Clone the repository using the following command:
 git clone https://github.com/kennethwirjadisastra/customer_churn.git
 ```
 
-The data is located in the [/data](./data) subdirectory, but it can also
-be downloaded from
+The data is located in the [data](./data/gym_churn_us.csv) subdirectory,
+but it can also be downloaded from
 [kaggle](https://www.kaggle.com/datasets/adrianvinueza/gym-customers-features-and-churn/data).
 The dependencies for this project are listed in
 [`requirements.txt`](requirements.txt). They can be installed by running
@@ -456,7 +456,10 @@ pip install -r requirements.txt
 ```
 
 Once the necessary dependencies have been installed, the notebooks
-should be run in the following order: 1.
-[`gym_churn_eda.ipynb`](gym_churn_eda.ipynb) 2.
-[`gym_churn_clustering.ipynb`](gym_churn_clustering.ipynb) 3.
-[`gym_churn_modeling.ipynb`](gym_churn_modeling.ipynb)
+should be run in the following order:
+
+1.  [`gym_churn_eda.ipynb`](gym_churn_eda.ipynb)
+
+2.  [`gym_churn_clustering.ipynb`](gym_churn_clustering.ipynb)
+
+3.  [`gym_churn_modeling.ipynb`](gym_churn_modeling.ipynb)
