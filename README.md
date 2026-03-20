@@ -306,8 +306,10 @@ three clusters are significantly different from one another.
 </tbody>
 </table>
 
-Based on this data, we can break down the clusters as follows: \###
-Cluster 0: New Year’s Resolutioners \* Short contract lengths \* Likely
+Based on this data, we can break down the clusters as follows: 
+### Cluster 0: New Year’s Resolutioners
+- Short contract lengths
+- Likely
 to leave soon
 
 ### Cluster 1: Average Gym Goer
