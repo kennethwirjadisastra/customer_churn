@@ -1,4 +1,4 @@
-# Customer Churn Prediction
+# [Customer Churn Prediction](https://github.com/kennethwirjadisastra/customer_churn)
 
 
 ## Problem Statement
