@@ -81,7 +81,7 @@ discount offer?</p>
 </tr>
 <tr>
 <td><code>Avg_additional_charges_total</code></td>
-<td>Average amount spend per week on extras (USD)</td>
+<td>Average amount spent per week on extras (USD)</td>
 </tr>
 <tr>
 <td><code>Month_to_end_contract</code></td>
@@ -396,6 +396,10 @@ This means that while this method overestimates a customer’s likelihood
 of leaving the gym. This can lead to identifying customers early, but it
 also leads to wasted efforts trying to retain customers that are not
 leaving.
+
+### 4. [`churn_dashboard.pbix`](churn_dashboard.pbix)
+After running the analysis, we visualize the data to better understand which customers are most likely to churn. We import the data into Power BI and make the necessary changes to datatypes in PowerQuery before creating the dashboard.
+![](README_files/figure-markdown_strict/churn_dashboard.png)
 
 ## Conclusions
 
