@@ -399,6 +399,7 @@ leaving.
 
 ### 4. [`churn_dashboard.pbix`](churn_dashboard.pbix)
 After running the analysis, we visualize the data to better understand which customers are most likely to churn. We import the data into Power BI and make the necessary changes to datatypes in PowerQuery before creating the dashboard.
+
 ![](README_files/figure-markdown_strict/churn_dashboard.png)
 
 ## Conclusions
